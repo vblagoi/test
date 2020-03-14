@@ -1,0 +1,13 @@
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Area</th>
+	</tr>
+	<% @field.each do |f| %>
+		<% @json_format = RGeo::GeoJSON.encode(f.shape).to_json %>
+	<tr>
+		<td><%= link_to f.name, f %></td>
+		<td><%= RGeo::Cartesian.preferred_factory.multi_polygon(f.shape).area %></td>
+	</tr>
+	<% end %> 
+</table>

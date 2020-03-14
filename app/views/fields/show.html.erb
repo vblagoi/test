@@ -1,0 +1,5 @@
+<% @json_format = RGeo::GeoJSON.encode(@field.shape).to_json %>
+
+<h1><%= @field.name %></h1>
+<p>GeoJSON format:</p> 
+<%= @json_format %>
