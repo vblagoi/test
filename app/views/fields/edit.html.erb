@@ -1,2 +1,30 @@
-<h1>Fields#edit</h1>
-<p>Find me in app/views/fields/edit.html.erb</p>
+<% provide(:title, "Edit") %>
+
+<div id="mapid"></div>
+
+		<%= form_for(@field) do |f| %>
+          <%= f.submit "Save changese", class: "btn btn-primary crField" %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+      		<%= f.label :name, "Field name" %>
+      		<%= f.text_field :name, class: 'form-control' %>
+
+      		<%= f.label :shape, "GeoJSON shape" %>
+      		<%= f.text_area :shape, class: 'form-control', rows: 3 %>
+		<% end %>
+    <%= button_to "delete", @field, :method => :delete, class: "btn btn-danger", data:
+        {confirm: "Are you sure you want to delete this field?" } %>
+	</div>
+</div>
+
+<script>
+  var map = makeMap();
+  var drawnItems = setDrawnItems();
+  setDrawControl();
+
+  multiPolygonToMap(<%= raw RGeo::GeoJSON.encode(@field.shape).to_json %>);
+  map.fitBounds(drawnItems.getBounds());
+
+  createOnMap();
+  exportToFormWithoutClick();
+</script>

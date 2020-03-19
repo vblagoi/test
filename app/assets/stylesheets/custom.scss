@@ -1,0 +1,78 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+body {
+  padding-top: 60px;
+}
+
+#mapid { 
+  height: 55vh; 
+}
+
+/* header */
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+}
+
+#logo:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* footer */
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: $gray-light;
+  small {
+    float: left;
+  }
+}
+
+
+
+input, textarea, .btndel {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+
+#fieldTable {
+  margin-top: 5vh;
+}
+
+#error_explanation {
+  margin-top: 10px;
+  text-align: center;
+  color: red;
+  ul {
+    text-align: left;
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+}
+
+.crField {
+  margin-bottom: 10px;
+}
+
+
+

@@ -1,5 +1,20 @@
+<% provide(:title, "Field info") %>
+
+<div id="mapid"></div>
+
+<%= button_to 'Edit field', edit_field_path(@field), :method => :get, class: "btn btn-primary btn-block" %>
+
 <% @json_format = RGeo::GeoJSON.encode(@field.shape).to_json %>
 
-<h1><%= @field.name %></h1>
-<p>GeoJSON format:</p> 
-<%= @json_format %>
+</br>
+
+<div class="container">
+	<h1><%= @field.name %></h1>
+	<p>GeoJSON format:</p> 
+	<%= @json_format %>
+</div>
+
+<script>
+	var map = makeMap();
+	setField(<%= raw @json_format %>);
+</script>

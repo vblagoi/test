@@ -1,13 +1,44 @@
-<table>
+<% provide(:title, "Home") %>
+
+<div id="mapid"></div>
+
+<script>
+	table = document.getElementById("fieldTable");
+	while(table.rows.length > 1) {
+  		table.deleteRow(-1);
+	}
+</script>
+
+<div class="container">
+<table  id="fieldTable" class="table table-striped table-bordered">
 	<tr>
-		<th>Name</th>
-		<th>Area</th>
+		<th class="text-center">Name</th>
+		<th class="text-center">Area</th>
 	</tr>
 	<% @field.each do |f| %>
 		<% @json_format = RGeo::GeoJSON.encode(f.shape).to_json %>
-	<tr>
-		<td><%= link_to f.name, f %></td>
-		<td><%= RGeo::Cartesian.preferred_factory.multi_polygon(f.shape).area %></td>
-	</tr>
+		<script>
+			var name = '<%= f.name %>';
+			var link = '<%= field_url(f) %>'
+			addArea(name, link, <%= raw @json_format %>);
+		</script>
 	<% end %> 
 </table>
+</div>
+
+<script>
+	var map = makeMap();
+  	var drawnItems = setDrawnItems();
+</script>
+
+<% @field.each do |f| %>
+	<% @json_format = RGeo::GeoJSON.encode(f.shape).to_json %>
+	<script>
+		multiPolygonToMap(<%= raw @json_format %>);
+	</script>
+<% end %>
+
+<script>
+	map.fitBounds(drawnItems.getBounds());
+</script>
+

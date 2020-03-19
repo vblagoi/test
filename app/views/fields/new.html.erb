@@ -1,2 +1,27 @@
-<h1>Fields#new</h1>
-<p>Find me in app/views/fields/new.html.erb</p>
+<% provide(:title, "New field") %>
+
+<div id="mapid"></div>
+
+		<%= form_for(@field) do |f| %>
+          <%= f.submit "Create my field", class: "btn btn-primary crField" %>
+          <%= render 'shared/error_messages' %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">      
+      		<%= f.label :name, "Field name" %>
+      		<%= f.text_field :name, class: 'form-control' %>
+
+      		<%= f.label :shape, "GeoJSON shape" %>
+      		<%= f.text_area :shape, class: 'form-control', rows: 4 %>
+
+      		
+		<% end %>
+	</div>
+</div>
+
+<script>
+  var map = makeMap();
+  var drawnItems = setDrawnItems();
+  setDrawControl();
+  createOnMap();
+  exportToFormWithoutClick();
+</script>
